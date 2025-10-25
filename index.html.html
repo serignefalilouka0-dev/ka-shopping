@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ka Shopping - Mode Africaine Dakar</title>
+    <meta name="description" content="Boutique de vêtements africains modernes à Dakar. Wax, boubous, robes traditionnelles. Livraison gratuite à partir de 25.000 CFA.">
+    <style>
+        /* RESET ET BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2c5530;
+            --secondary: #4a7c59;
+            --accent: #ff6b00;
+            --error: #e74c3c;
+            --success: #27ae60;
+            --text: #333;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+            padding-bottom: 80px; /* Espace pour les boutons flottants */
+        }
+
+        /* HEADER MOBILE */
+        .contact-header {
+            background: #1e3a28;
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 12px;
+        }
+
+        .contact-header .container {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* NAVIGATION PRINCIPALE */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--error);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(44, 85, 48, 0.8), rgba(44, 85, 48, 0.8)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 0;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* BOUTONS */
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+        }
+
+        .btn-green {
+            background: var(--success);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* PRODUITS */
+        .products-section {
+            padding: 40px 16px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            background: var(--white);
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .stock-info {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* BANNIERE PROMO */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--error), #c0392b);
+            color: var(--white);
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* MODAL CONNEXION */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 4000;
+        }
+
+        .login-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 24px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px; /* Évite le zoom sur iOS */
+        }
+
+        /* GESTION ADMIN */
+        .admin-section {
+            display: none;
+            margin: 20px 16px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        .admin-panel {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* BOUTONS FLOTTANTS */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 80px;
+            right: 16px;
+            background: #25D366;
+            color: var(--white);
+            padding: 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .orange-money-float {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .login-float {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            background: var(--error);
+            color: var(--white);
+            padding: 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .admin-float {
+            position: fixed;
+            bottom: 80px;
+            left: 16px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: none;
+        }
+
+        .mobile-float {
+            position: fixed;
+            bottom: 144px;
+            left: 16px;
+            background: #9b59b6;
+            color: var(--white);
+            padding: 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: none;
+        }
+
+        .whatsapp-float:hover,
+        .orange-money-float:hover,
+        .login-float:hover,
+        .admin-float:hover,
+        .mobile-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* NOTIFICATIONS */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 16px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 16px;
+            border-radius: 8px;
+            z-index: 3000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            max-width: 300px;
+            font-size: 14px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .contact-header .container {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            .hero-content h1 {
+                font-size: 24px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .filters {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-content h1 {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .product-card {
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Connexion -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <div class="login-icon">🔒</div>
+            <h2>Accès Propriétaire</h2>
+            <p>Espace réservé à la gestion de la boutique</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Mot de passe administrateur" required>
+                </div>
+                <button type="submit" class="btn btn-green" style="width: 100%;">
+                    🔑 Se Connecter
+                </button>
+            </form>
+            <p style="margin-top: 12px; font-size: 12px; color: #666;">
+                Mot de passe: <strong>KaShopping2024</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- En-tête Contact -->
+    <div class="contact-header">
+        <div class="container">
+            <div class="contact-info">
+                <div class="contact-item">📞 78 432 99 60</div>
+                <div class="contact-item">📍 HLM Grande Yoff, Dakar</div>
+            </div>
+            <div class="social-links">
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="TikTok">🎵</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bannière Promotion -->
+    <div class="promo-banner">
+        🎉 LIVRAISON GRATUITE À PARTIR DE 25.000 CFA 🎉
+    </div>
+
+    <!-- Navigation Principale -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Ka <span>Shopping</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#produits">Produits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>Ka Shopping Dakar</h1>
+            <p>Mode Africaine Moderne & Authentique</p>
+            <a href="#produits" class="btn">Découvrir la Collection</a>
+        </div>
+    </section>
+
+    <!-- Section Produits -->
+    <section class="products-section" id="produits">
+        <h2 class="section-title">Nos Créations</h2>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">Tous</button>
+            <button class="filter-btn" onclick="filterProducts('homme')">Homme</button>
+            <button class="filter-btn" onclick="filterProducts('femme')">Femme</button>
+            <button class="filter-btn" onclick="filterProducts('enfant')">Enfant</button>
+            <button class="filter-btn" onclick="filterProducts('accessoire')">Accessoires</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Produits chargés par JavaScript -->
+        </div>
+    </section>
+
+    <!-- Gestion Admin (cachée par défaut) -->
+    <div class="admin-section" id="mobileProductManager">
+        <h2 class="section-title">📱 Gestion des Produits</h2>
+        
+        <div class="admin-panel">
+            <h3>➕ Nouveau Produit</h3>
+            <form id="mobileProductForm">
+                <div class="form-group">
+                    <label>📸 Photo du produit</label>
+                    <input type="file" id="productPhoto" accept="image/*" capture="camera" required>
+                </div>
+                
+                <div id="imagePreview" style="text-align: center; margin: 12px 0;"></div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0;">
+                    <div class="form-group">
+                        <label>Nom du produit</label>
+                        <input type="text" id="mobileProductName" required placeholder="Ex: Robe Wax">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix (CFA)</label>
+                        <input type="number" id="mobileProductPrice" required placeholder="15000">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0;">
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select id="mobileProductCategory" required>
+                            <option value="homme">👔 Homme</option>
+                            <option value="femme">👗 Femme</option>
+                            <option value="enfant">👶 Enfant</option>
+                            <option value="accessoire">👜 Accessoire</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" id="mobileProductStock" value="1" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="mobileProductDescription" placeholder="Couleur, taille, matière..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-green" style="width: 100%;">
+                    📦 Ajouter le Produit
+                </button>
+            </form>
+        </div>
+
+        <div class="admin-panel">
+            <h3>✏️ Produits Existants</h3>
+            <div id="productManagementList">
+                <!-- Liste des produits -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Boutons Flottants -->
+    <a href="https://wa.me/221784329960" class="whatsapp-float" target="_blank" title="Commander sur WhatsApp">
+        💬
+    </a>
+    
+    <div class="orange-money-float" onclick="showPaymentInfo()" title="Paiement Orange Money">
+        🟠
+    </div>
+    
+    <div class="login-float" onclick="showLoginModal()" title="Connexion Propriétaire">
+        🔑
+    </div>
+
+    <div class="admin-float" onclick="toggleMobileProductManager()" title="Gestion Boutique">
+        🏪
+    </div>
+
+    <div class="mobile-float" onclick="toggleMobileProductManager()" title="Ajouter Produit">
+        📸
+    </div>
+
+    <script>
+        // ================= CONFIGURATION =================
+        const ADMIN_PASSWORD = "KaShopping2024";
+        let products = JSON.parse(localStorage.getItem('kaShoppingProducts')) || [];
+        let cart = [];
+        let currentFilter = 'all';
+        let isAdmin = false;
+
+        // ================= INITIALISATION =================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Charger les produits par défaut si vide
+            if (products.length === 0) {
+                products = [
+                    {
+                        id: 1,
+                        name: "Chemise Africaine Homme",
+                        price: 15000,
+                        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        category: "homme",
+                        stock: 15,
+                        description: "Chemise traditionnelle en coton"
+                    },
+                    {
+                        id: 2,
+                        name: "Robe Wax Moderne",
+                        price: 25000,
+                        image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                        category: "femme",
+                        stock: 8,
+                        description: "Robe élégante en wax"
+                    }
+                ];
+                saveProductsToStorage();
+            }
+            
+            loadProducts();
+            updateCartCount();
+            checkAdminSession();
+            
+            // Événements
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('mobileProductForm').addEventListener('submit', handleMobileProductSubmit);
+            document.getElementById('productPhoto').addEventListener('change', handleImagePreview);
+            
+            showToast('👋 Bienvenue chez Ka Shopping !');
+        });
+
+        // ================= FONCTIONS PRINCIPALES =================
+        function checkAdminSession() {
+            if (localStorage.getItem('kaShoppingIsAdmin') === 'true') {
+                isAdmin = true;
+                showAdminFeatures();
+            }
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                localStorage.setItem('kaShoppingIsAdmin', 'true');
+                document.getElementById('loginModal').style.display = 'none';
+                showAdminFeatures();
+                showToast('✅ Connexion réussie !');
+            } else {
+                showToast('❌ Mot de passe incorrect', 'error');
+            }
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function showAdminFeatures() {
+            document.querySelector('.login-float').style.display = 'none';
+            document.querySelector('.admin-float').style.display = 'block';
+            document.querySelector('.mobile-float').style.display = 'block';
+            displayProductManagementList();
+        }
+
+        function logout() {
+            isAdmin = false;
+            localStorage.removeItem('kaShoppingIsAdmin');
+            document.querySelector('.admin-float').style.display = 'none';
+            document.querySelector('.mobile-float').style.display = 'none';
+            document.querySelector('.login-float').style.display = 'block';
+            document.getElementById('mobileProductManager').style.display = 'none';
+            showToast('👋 Déconnexion réussie');
+        }
+
+        // ================= GESTION PRODUITS =================
+        function toggleMobileProductManager() {
+            if (!isAdmin) {
+                showLoginModal();
+                return;
+            }
+            
+            const manager = document.getElementById('mobileProductManager');
+            manager.style.display = manager.style.display === 'block' ? 'none' : 'block';
+            if (manager.style.display === 'block') {
+                displayProductManagementList();
+            }
+        }
+
+        function handleImagePreview(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = 
+                        `<img src="${e.target.result}" alt="Aperçu" style="max-width: 200px; border-radius: 8px;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleMobileProductSubmit(e) {
+            e.preventDefault();
+            
+            if (!isAdmin) {
+                showLoginModal();
+                return;
+            }
+            
+            const fileInput = document.getElementById('productPhoto');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showToast('📸 Prenez une photo du produit', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newProduct = {
+                    id: Date.now(),
+                    name: document.getElementById('mobileProductName').value,
+                    price: parseInt(document.getElementById('mobileProductPrice').value),
+                    category: document.getElementById('mobileProductCategory').value,
+                    stock: parseInt(document.getElementById('mobileProductStock').value),
+                    description: document.getElementById('mobileProductDescription').value,
+                    image: e.target.result
+                };
+                
+                products.push(newProduct);
+                saveProductsToStorage();
+                
+                displayProductManagementList();
+                loadProducts(currentFilter);
+                
+                document.getElementById('mobileProductForm').reset();
+                document.getElementById('imagePreview').innerHTML = '';
+                
+                showToast(`🎉 "${newProduct.name}" ajouté !`);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayProductManagementList() {
+            if (!isAdmin) return;
+            
+            const container = document.getElementById('productManagementList');
+            container.innerHTML = '';
+            
+            if (products.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 20px; color: #666;">Aucun produit</p>';
+                return;
+            }
+            
+            // Header
+            const header = document.createElement('div');
+            header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;';
+            header.innerHTML = `
+                <span><strong>${products.length} produits</strong></span>
+                <button class="btn" onclick="logout()" style="padding: 6px 12px; font-size: 12px; background: #95a5a6;">
+                    🚪 Déconnexion
+                </button>
+            `;
+            container.appendChild(header);
+            
+            // Liste des produits
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.style.cssText = `
+                    display: grid;
+                    grid-template-columns: 60px 1fr auto auto auto;
+                    gap: 12px;
+                    align-items: center;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                    background: white;
+                `;
+                
+                item.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                    <div style="font-size: 14px;">
+                        <strong>${product.name}</strong><br>
+                        <small style="color: #666;">${product.category}</small>
+                    </div>
+                    <input type="number" value="${product.price}" onchange="updateProductPrice(${product.id}, this.value)"
+                           style="width: 80px; padding: 6px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                    <input type="number" value="${product.stock}" onchange="updateProductStock(${product.id}, this.value)"
+                           style="width: 60px; padding: 6px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;">
+                    <button onclick="deleteProduct(${product.id})" 
+                            style="background: #e74c3c; color: white; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        🗑️
+                    </button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateProductPrice(productId, newPrice) {
+            if (!isAdmin) return;
+            const product = products.find(p => p.id === productId);
+            if (product && newPrice > 0) {
+                product.price = parseInt(newPrice);
+                saveProductsToStorage();
+                loadProducts(currentFilter);
+                showToast(`💰 Prix mis à jour`);
+            }
+        }
+
+        function updateProductStock(productId, newStock) {
+            if (!isAdmin) return;
+            const product = products.find(p => p.id === productId);
+            if (product && newStock >= 0) {
+                product.stock = parseInt(newStock);
+                saveProductsToStorage();
+                loadProducts(currentFilter);
+                showToast(`📦 Stock mis à jour`);
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (!isAdmin) return;
+            const product = products.find(p => p.id === productId);
+            if (product && confirm(`Supprimer "${product.name}" ?`)) {
+                products = products.filter(p => p.id !== productId);
+                saveProductsToStorage();
+                displayProductManagementList();
+                loadProducts(currentFilter);
+                showToast('🗑️ Produit supprimé');
+            }
+        }
+
+        // ================= BOUTIQUE =================
+        function loadProducts(filter = 'all') {
+            const productsGrid = document.getElementById('productsGrid');
+            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            productsGrid.innerHTML = '';
+            
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px; color: #666;">Aucun produit dans cette catégorie</p>';
+                return;
+            }
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        ${product.description ? `<p style="color: #666; font-size: 13px; margin-bottom: 8px;">${product.description}</p>` : ''}
+                        <div class="product-price">${product.price.toLocaleString()} CFA</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                Ajouter
+                            </button>
+                            <span class="stock-info">Stock: ${product.stock}</span>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function filterProducts(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            currentFilter = category;
+            loadProducts(category);
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                if (existingItem.quantity < product.stock) {
+                    existingItem.quantity++;
+                    showToast(`${product.name} ajouté au panier`);
+                } else {
+                    showToast('Stock insuffisant', 'error');
+                    return;
+                }
+            } else {
+                cart.push({...product, quantity: 1});
+                showToast(`${product.name} ajouté au panier`);
+            }
+            updateCartCount();
+            saveCartToStorage();
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = totalItems;
+        }
+
+        function toggleCart() {
+            showToast('🛒 Panier - Fonction à venir');
+        }
+
+        function showPaymentInfo() {
+            showToast('📞 Contactez-nous au 78 432 99 60 pour payer');
+        }
+
+        // ================= UTILITAIRES =================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            toast.style.background = type === 'error' ? '#e74c3c' : '#2c5530';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function saveProductsToStorage() {
+            localStorage.setItem('kaShoppingProducts', JSON.stringify(products));
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('kaShoppingCart', JSON.stringify(cart));
+        }
+
+        // Charger le panier
+        (function loadCartFromStorage() {
+            const savedCart = localStorage.getItem('kaShoppingCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartCount();
+            }
+        })();
+    </script>
+</body>
+</html>
